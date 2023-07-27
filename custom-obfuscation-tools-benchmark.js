@@ -10,7 +10,7 @@
         const t0 = performance.now();
         const sum = benchmarkTestedModule.func.call(this);
         const t1 = performance.now();
-        resolve(`time: ${(t1 - t0) / 1000}s, with sum ${sum}, for ${this.iterations} iterations`);
+        resolve(`time: ${(t1 - t0) / 1e3}s, with sum ${sum}, for ${this.iterations} iterations`);
       });
     };
 
@@ -20,7 +20,7 @@
         const t0 = performance.now();
         const sum = benchmarkTestedModule["func"].call(this);
         const t1 = performance.now();
-        resolve(`time: ${(t1 - t0) / 1000}s, with sum ${sum}, for ${this.iterations} iterations`);
+        resolve(`time: ${(t1 - t0) / 1e3}s, with sum ${sum}, for ${this.iterations} iterations`);
       });
     };
 
@@ -30,7 +30,7 @@
         const t0 = performance.now();
         const sum = benchmarkTestedModule["\x66\x75\x6e\x63"].call(this);
         const t1 = performance.now();
-        resolve(`time: ${(t1 - t0) / 1000}s, with sum ${sum}, for ${this.iterations} iterations`);
+        resolve(`time: ${(t1 - t0) / 1e3}s, with sum ${sum}, for ${this.iterations} iterations`);
       });
     };
 
@@ -40,7 +40,7 @@
         const t0 = performance.now();
         const sum = benchmarkTestedModule[0].call(this);
         const t1 = performance.now();
-        resolve(`time: ${(t1 - t0) / 1000}s, with sum ${sum}, for ${this.iterations} iterations`);
+        resolve(`time: ${(t1 - t0) / 1e3}s, with sum ${sum}, for ${this.iterations} iterations`);
       });
     };
 
@@ -53,7 +53,7 @@
             this
           );
         const t1 = performance.now();
-        resolve(`time: ${(t1 - t0) / 1000}s, with sum ${sum}, for ${this.iterations} iterations`);
+        resolve(`time: ${(t1 - t0) / 1e3}s, with sum ${sum}, for ${this.iterations} iterations`);
       });
     };
 
@@ -64,12 +64,12 @@
         const sum =
           benchmarkTestedModule[
             require("crypto")
-              .createHmac("sha256", `${Math.ceil(Date.now() / 10000)}`)
+              .createHmac("sha256", `${Math.ceil(Date.now() / 1e4)}`)
               .update("func")
               .digest("hex")
           ].call(this);
         const t1 = performance.now();
-        resolve(`time: ${(t1 - t0) / 1000}s, with sum ${sum}, for ${this.iterations} iterations`);
+        resolve(`time: ${(t1 - t0) / 1e3}s, with sum ${sum}, for ${this.iterations} iterations`);
       });
     };
 
@@ -91,7 +91,7 @@
 
     const enclodedByTimeTestmodule = {
       [require("crypto")
-        .createHmac("sha256", `${Math.ceil(Date.now() / 10000)}`)
+        .createHmac("sha256", `${Math.ceil(Date.now() / 1e4)}`)
         .update("func")
         .digest("hex")]: () => {
         let sum = 0;
@@ -149,7 +149,7 @@
         method: "with secret based on a time",
         result: await BasedOnTimeSecretBenchmarkFunction(iterations, {
           [require("crypto")
-            .createHmac("sha256", `${Math.ceil(Date.now() / 10000)}`)
+            .createHmac("sha256", `${Math.ceil(Date.now() / 1e4)}`)
             .update("func")
             .digest("hex")]: () => {
             let sum = 0;
